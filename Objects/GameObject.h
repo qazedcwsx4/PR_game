@@ -12,6 +12,7 @@ class GameObject {
 protected:
     sf::RenderWindow &renderWindow;
     BoundingBox box;
+    sf::Shape *shape;
     explicit GameObject(sf::RenderWindow &renderWindow);
 
 public:
