@@ -3,15 +3,9 @@
 
 #include <SFML/Graphics.hpp>
 
-struct BoundingBox {
-    float x1, x2;
-    float y1, y2;
-};
-
 class GameObject {
 protected:
     sf::RenderWindow &renderWindow;
-    BoundingBox box;
     sf::Shape *shape;
     explicit GameObject(sf::RenderWindow &renderWindow);
 
