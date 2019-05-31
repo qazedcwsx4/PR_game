@@ -9,12 +9,14 @@ class Logic;
 class Renderer {
 private:
     sf::RenderWindow renderWindow;
-    sf::Clock stoper;
     Logic *logic;
+
 public:
-    Renderer(unsigned int width, unsigned int height, const std::string &title);
+    Renderer(Logic* logic, unsigned int width, unsigned int height, const std::string &title);
 
     void render(double dT);
+
+    sf::RenderWindow &getRenderWindow();
 };
 
 
