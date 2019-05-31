@@ -7,8 +7,9 @@
 #include "Game.h"
 
 void Game::launch() {
-    logic = new Logic(new Renderer(logic, 1280, 720, "Game"));
+    logic = new Logic(new Renderer(1280, 720, "Game"));
     renderer = logic->getRenderer();
+    renderer->setLogic(logic);
 
     loop();
 }

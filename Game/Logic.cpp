@@ -3,7 +3,8 @@
 #include "Logic.h"
 
 Logic::Logic(Renderer *renderer) : renderer(renderer) {
-
+    map = new Map(renderer->getRenderWindow());
+    map->render();
 }
 
 Renderer *Logic::getRenderer() {
@@ -21,5 +22,13 @@ void Logic::tick(int skipped) {
                 break;
         }
     }
+}
+
+Map *Logic::getMap() {
+    return map;
+}
+
+Logic::~Logic() {
+    delete map;
 }
 

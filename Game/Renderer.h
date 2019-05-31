@@ -12,11 +12,13 @@ private:
     Logic *logic;
 
 public:
-    Renderer(Logic* logic, unsigned int width, unsigned int height, const std::string &title);
+    Renderer(unsigned int width, unsigned int height, const std::string &title);
 
     void render(double dT);
 
     sf::RenderWindow &getRenderWindow();
+
+    void setLogic(Logic *logic);
 };
 
 
