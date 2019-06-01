@@ -17,6 +17,14 @@ public:
     virtual void render() = 0;
 
     virtual ~GameObject() = default;
+
+    sf::Vector2f getPosition();
+
+    void setPosition(float x, float y);
+
+    float getAngle();
+
+    void setAngle(float angle);
 };
 
 

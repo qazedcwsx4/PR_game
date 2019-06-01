@@ -26,3 +26,7 @@ void Player::render() {
 Player::~Player() {
 
 }
+
+bool Player::isMyPlayer() const {
+    return myPlayer;
+}

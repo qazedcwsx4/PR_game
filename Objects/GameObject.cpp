@@ -7,3 +7,11 @@ bool GameObject::collisionBroad(GameObject &gameObject) {
 GameObject::GameObject(sf::RenderWindow &renderWindow) : renderWindow(renderWindow) {
 
 }
+
+sf::Vector2f GameObject::getPosition() {
+    return shape->getPosition();
+}
+
+void GameObject::setAngle(float angle) {
+    shape->setRotation(angle);
+}

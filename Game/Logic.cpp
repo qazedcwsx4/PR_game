@@ -27,11 +27,26 @@ void Logic::tick(int skipped) {
     }
 
     //get inputs
-    sf::Vector2i mousePosition = sf::Mouse::getPosition(renderer->getRenderWindow());
+    sf::Vector2f mousePosition = (sf::Vector2f) sf::Mouse::getPosition(renderer->getRenderWindow());
 
 
+    //process players
+    for (Player &player : players) {
+        if (player.isMyPlayer()) {
+            sf::Vector2f myPlayerPosition = player.getPosition();
+            float angle;
 
-
+            //terribly ugly myPlayer angle calculation
+            if (mousePosition.y <= myPlayerPosition.y)
+                angle = -atan((mousePosition.x - myPlayerPosition.x) / (mousePosition.y - myPlayerPosition.y)) * 180 /
+                        3.14159265;
+            else
+                angle = -atan((mousePosition.x - myPlayerPosition.x) / (mousePosition.y - myPlayerPosition.y)) * 180 /
+                        3.14159265 + 180;
+            player.setAngle(angle);
+        }
+    }
+//            float angle = -atan((mousePosition.x - myPlayerPosition.x) / (mousePosition.y - myPlayerPosition.y)) * 180 /
 }
 
 Map *Logic::getMap() {
