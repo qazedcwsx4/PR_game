@@ -36,10 +36,10 @@ void Game::loop() {
 
     while (!shouldQuit) {
         if (clock.getElapsedTime() - prevFrame >= targetFrameTime) {
-            double dT = (double) (clock.getElapsedTime() - prevFrame).asMicroseconds() / 1000000;
-            prevFrame = clock.getElapsedTime();
-            frames++;
+            double dT = (double) (clock.getElapsedTime() - prevTick).asMicroseconds() / 1000000;
             renderer->render(dT);
+            frames++;
+            prevFrame = clock.getElapsedTime();
         }
         if (clock.getElapsedTime() - prevTick >= targetTickTime) {
             int skipped =
