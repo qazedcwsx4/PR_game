@@ -7,7 +7,9 @@
 #include "Game.h"
 
 void Game::launch() {
-    logic = new Logic(new Renderer(1280, 720, "Game"));
+    sf::ContextSettings settings;
+    settings.antialiasingLevel = 8;
+    logic = new Logic(new Renderer(1280, 720, "Game", settings));
     renderer = logic->getRenderer();
     Textures::loadAll();
     renderer->setLogic(logic);

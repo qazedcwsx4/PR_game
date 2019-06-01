@@ -11,6 +11,7 @@ void Textures::loadAll() {
     if (!playerTexture->loadFromFile("../Resources/player.png")) {
         std::cout << "ERROR LOADING TEXTURES\n";
     }
+    playerTexture->setSmooth(true);
 }
 
 sf::Texture *Textures::getPlayerTexture() {

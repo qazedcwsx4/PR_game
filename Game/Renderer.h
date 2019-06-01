@@ -12,7 +12,7 @@ private:
     Logic *logic;
 
 public:
-    Renderer(unsigned int width, unsigned int height, const std::string &title);
+    Renderer(unsigned int width, unsigned int height, const std::string &title, sf::ContextSettings settings);
 
     void render(double dT);
 
