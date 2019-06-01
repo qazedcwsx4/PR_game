@@ -5,6 +5,7 @@
 Logic::Logic(Renderer *renderer) : renderer(renderer) {
     map = new Map(renderer->getRenderWindow());
     map->render();
+    players.emplace_back(renderer->getRenderWindow(), 200, 200);
 }
 
 Renderer *Logic::getRenderer() {
@@ -30,5 +31,9 @@ Map *Logic::getMap() {
 
 Logic::~Logic() {
     delete map;
+}
+
+std::list<Player> &Logic::getPlayers() {
+    return players;
 }
 

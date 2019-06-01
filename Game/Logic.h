@@ -3,7 +3,8 @@
 
 #include "Renderer.h"
 #include "../Objects/Map.h"
-
+#include "../Objects/Player.h"
+#include <list>
 
 class Renderer;
 class Map;
@@ -12,6 +13,7 @@ class Logic {
 private:
     Renderer *renderer;
     Map *map;
+    std::list<Player> players;
 public:
     Logic(Renderer *renderer);
 
@@ -22,6 +24,8 @@ public:
     Renderer *getRenderer();
 
     Map *getMap();
+
+    std::list<Player> &getPlayers();
 };
 
 

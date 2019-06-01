@@ -1,5 +1,4 @@
 #include "Renderer.h"
-#include "../Objects/Player.h"
 
 Renderer::Renderer(unsigned int width, unsigned int height, const std::string &title, sf::ContextSettings settings) :
         renderWindow(sf::VideoMode(width, height), title, sf::Style::Default, settings) {
@@ -8,8 +7,9 @@ Renderer::Renderer(unsigned int width, unsigned int height, const std::string &t
 void Renderer::render(double dT) {
     renderWindow.clear();
     logic->getMap()->render();
-    Player player(renderWindow, 100, 100);
-    player.render();
+    for (Player &player : logic->getPlayers()){
+        player.render();
+    }
     renderWindow.display();
 }
 
