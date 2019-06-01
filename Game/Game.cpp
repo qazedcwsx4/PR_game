@@ -9,8 +9,8 @@
 void Game::launch() {
     logic = new Logic(new Renderer(1280, 720, "Game"));
     renderer = logic->getRenderer();
+    Textures::loadAll();
     renderer->setLogic(logic);
-
     loop();
 }
 
