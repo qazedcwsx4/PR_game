@@ -5,7 +5,7 @@
 Logic::Logic(Renderer *renderer) : renderer(renderer) {
     map = new Map(renderer->getRenderWindow());
     map->render();
-    players.emplace_back(renderer->getRenderWindow(), 200, 200);
+    players.emplace_back(renderer->getRenderWindow(), 200, 200, true);
 }
 
 Renderer *Logic::getRenderer() {
@@ -13,6 +13,8 @@ Renderer *Logic::getRenderer() {
 }
 
 void Logic::tick(int skipped) {
+
+    //handle events
     sf::Event event;
     while (renderer->getRenderWindow().pollEvent(event)) {
         //handle events;
@@ -23,6 +25,13 @@ void Logic::tick(int skipped) {
                 break;
         }
     }
+
+    //get inputs
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(renderer->getRenderWindow());
+
+
+
+
 }
 
 Map *Logic::getMap() {

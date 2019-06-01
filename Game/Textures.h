@@ -11,10 +11,13 @@
 class Textures {
 public:
     static sf::Texture *playerTexture;
+    static sf::Texture *myPlayerTexture;
 public:
     static void loadAll();
 
     static sf::Texture *getPlayerTexture();
+
+    static sf::Texture *getMyPlayerTexture();
 };
 
 

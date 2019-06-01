@@ -9,7 +9,8 @@
 
 class Player : protected GameObject{
 public:
-    Player(sf::RenderWindow &renderWindow, float x, float y);
+    bool myPlayer;
+    Player(sf::RenderWindow &renderWindow, float x, float y, bool myPlayer);
     bool collisionNarrow(GameObject &gameObject) override;
     void render() override;
     ~Player();
