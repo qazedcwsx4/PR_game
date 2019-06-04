@@ -48,3 +48,10 @@ sf::Texture *Textures::getBulletTexture() {
 sf::Texture *Textures::getMyBulletTexture() {
     return myBulletTexture;
 }
+
+void Textures::unloadAll() {
+    delete playerTexture;
+    delete myPlayerTexture;
+    delete bulletTexture;
+    delete myBulletTexture;
+}

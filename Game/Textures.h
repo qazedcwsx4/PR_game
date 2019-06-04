@@ -17,6 +17,8 @@ public:
 public:
     static void loadAll();
 
+    static void unloadAll();
+
     static sf::Texture *getPlayerTexture();
 
     static sf::Texture *getMyPlayerTexture();
