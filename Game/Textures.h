@@ -12,12 +12,19 @@ class Textures {
 public:
     static sf::Texture *playerTexture;
     static sf::Texture *myPlayerTexture;
+    static sf::Texture *bulletTexture;
+    static sf::Texture *myBulletTexture;
 public:
     static void loadAll();
 
     static sf::Texture *getPlayerTexture();
 
     static sf::Texture *getMyPlayerTexture();
+
+    static sf::Texture *getBulletTexture();
+
+    static sf::Texture *getMyBulletTexture();
+
 };
 
 

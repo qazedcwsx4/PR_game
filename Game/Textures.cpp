@@ -19,6 +19,18 @@ void Textures::loadAll() {
         std::cout << "ERROR LOADING TEXTURES\n";
     }
     myPlayerTexture->setSmooth(true);
+
+    bulletTexture = new sf::Texture;
+    if (!bulletTexture->loadFromFile("../Resources/bullet.png")) {
+        std::cout << "ERROR LOADING TEXTURES\n";
+    }
+    bulletTexture->setSmooth(true);
+
+    myBulletTexture = new sf::Texture;
+    if (!myBulletTexture->loadFromFile("../Resources/myBullet.png")) {
+        std::cout << "ERROR LOADING TEXTURES\n";
+    }
+    myBulletTexture->setSmooth(true);
 }
 
 sf::Texture *Textures::getPlayerTexture() {
@@ -27,4 +39,12 @@ sf::Texture *Textures::getPlayerTexture() {
 
 sf::Texture *Textures::getMyPlayerTexture() {
     return myPlayerTexture;
+}
+
+sf::Texture *Textures::getBulletTexture() {
+    return bulletTexture;
+}
+
+sf::Texture *Textures::getMyBulletTexture() {
+    return myBulletTexture;
 }
