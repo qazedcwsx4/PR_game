@@ -6,6 +6,8 @@
 
 sf::Texture *Textures::playerTexture = nullptr;
 sf::Texture *Textures::myPlayerTexture = nullptr;
+sf::Texture *Textures::bulletTexture = nullptr;
+sf::Texture *Textures::myBulletTexture = nullptr;
 
 void Textures::loadAll() {
     playerTexture = new sf::Texture;
