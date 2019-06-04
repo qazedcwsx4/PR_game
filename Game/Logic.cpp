@@ -26,6 +26,8 @@ void Logic::tick(int skipped) {
         }
     }
 
+    //handle net events;
+
     //get inputs
     sf::Vector2f mousePosition = (sf::Vector2f) sf::Mouse::getPosition(renderer->getRenderWindow());
 
@@ -34,19 +36,30 @@ void Logic::tick(int skipped) {
     for (Player &player : players) {
         if (player.isMyPlayer()) {
             sf::Vector2f myPlayerPosition = player.getPosition();
-            float angle;
+            float myPlayerAngle;
 
             //terribly ugly myPlayer angle calculation
             if (mousePosition.y <= myPlayerPosition.y)
-                angle = -atan((mousePosition.x - myPlayerPosition.x) / (mousePosition.y - myPlayerPosition.y)) * 180 /
+                myPlayerAngle =
+                        -atan((mousePosition.x - myPlayerPosition.x) / (mousePosition.y - myPlayerPosition.y)) * 180 /
                         3.14159265;
             else
-                angle = -atan((mousePosition.x - myPlayerPosition.x) / (mousePosition.y - myPlayerPosition.y)) * 180 /
+                myPlayerAngle =
+                        -atan((mousePosition.x - myPlayerPosition.x) / (mousePosition.y - myPlayerPosition.y)) * 180 /
                         3.14159265 + 180;
-            player.setAngle(angle);
+            player.setAngle(myPlayerAngle);
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+                player.moveBy(-3, 0);
+            } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+                player.moveBy(3, 0);
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+                player.moveBy(0, -3);
+            } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+                player.moveBy(0, 3);
+            }
         }
     }
-//            float angle = -atan((mousePosition.x - myPlayerPosition.x) / (mousePosition.y - myPlayerPosition.y)) * 180 /
 }
 
 Map *Logic::getMap() {

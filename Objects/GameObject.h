@@ -25,6 +25,8 @@ public:
     float getAngle();
 
     void setAngle(float angle);
+
+    void moveBy(float x, float y);
 };
 
 

@@ -17,7 +17,7 @@ void Game::launch() {
 }
 
 void Game::loop() {
-    targetFPS = 50;
+    targetFPS = 144;
     targetTickrate = 120;
 
     sf::Time targetFrameTime = sf::microseconds(1000000 / targetFPS);
