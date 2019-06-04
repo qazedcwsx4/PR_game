@@ -4,6 +4,7 @@
 #include "Renderer.h"
 #include "../Objects/Map.h"
 #include "../Objects/Player.h"
+#include "../Objects/Bullet.h"
 #include <list>
 
 class Renderer;
@@ -14,6 +15,8 @@ private:
     Renderer *renderer;
     Map *map;
     std::list<Player> players;
+    std::list<Bullet> bullets;
+    Player *myPlayer;
 public:
     Logic(Renderer *renderer);
 
@@ -26,6 +29,8 @@ public:
     Map *getMap();
 
     std::list<Player> &getPlayers();
+
+    std::list<Bullet> &getBullets();
 };
 
 

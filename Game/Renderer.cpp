@@ -10,6 +10,9 @@ void Renderer::render(double dT) {
     for (Player &player : logic->getPlayers()){
         player.render();
     }
+    for (Bullet &bullet : logic->getBullets()){
+        bullet.render();
+    }
     renderWindow.display();
 }
 

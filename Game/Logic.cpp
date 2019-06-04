@@ -6,6 +6,7 @@ Logic::Logic(Renderer *renderer) : renderer(renderer) {
     map = new Map(renderer->getRenderWindow());
     map->render();
     players.emplace_back(renderer->getRenderWindow(), 200, 200, true);
+    myPlayer = &(players.front());
 }
 
 Renderer *Logic::getRenderer() {
@@ -23,6 +24,12 @@ void Logic::tick(int skipped) {
             case sf::Event::Closed:
                 renderer->getRenderWindow().close();
                 break;
+
+            case sf::Event::MouseButtonPressed:
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    bullets.emplace_back(renderer->getRenderWindow(), *myPlayer);
+                    std::cout << "XDD";
+                }
         }
     }
 
@@ -72,5 +79,9 @@ Logic::~Logic() {
 
 std::list<Player> &Logic::getPlayers() {
     return players;
+}
+
+std::list<Bullet> &Logic::getBullets() {
+    return bullets;
 }
 
