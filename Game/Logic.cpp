@@ -38,7 +38,6 @@ void Logic::tick(int skipped) {
     //get inputs
     sf::Vector2f mousePosition = (sf::Vector2f) sf::Mouse::getPosition(renderer->getRenderWindow());
 
-
     //process players
     for (Player &player : players) {
         if (player.isMyPlayer()) {
@@ -66,6 +65,11 @@ void Logic::tick(int skipped) {
                 player.moveBy(0, 3);
             }
         }
+    }
+
+    //process bullets
+    for (Bullet &bullet : bullets) {
+        bullet.moveBy(1 * cos((bullet.getAngle()-90)*3.14159265/180), 1 * sin((bullet.getAngle()-90)*3.14159265/180));
     }
 }
 

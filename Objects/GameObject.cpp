@@ -19,3 +19,7 @@ void GameObject::setAngle(float angle) {
 void GameObject::moveBy(float x, float y) {
     shape->move(x, y);
 }
+
+float GameObject::getAngle() {
+    return shape->getRotation();
+}

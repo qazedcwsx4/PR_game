@@ -4,7 +4,7 @@
 
 #include "Bullet.h"
 
-Bullet::Bullet(sf::RenderWindow &renderWindow, Player &player) : GameObject(renderWindow) {
+Bullet::Bullet(sf::RenderWindow &renderWindow, Player &player) : GameObject(renderWindow), angle(player.getAngle()) {
     shape = new sf::CircleShape(50);
     shape->setTexture(Textures::getMyBulletTexture());
     shape->setOrigin(50, 50);
@@ -17,10 +17,16 @@ Bullet::~Bullet() {
 
 }
 
+
+
 bool Bullet::collisionNarrow(GameObject &gameObject) {
     return false;
 }
 
 void Bullet::render() {
     renderWindow.draw(*shape);
+}
+
+float Bullet::getAngle() {
+    return angle;
 }

@@ -22,7 +22,7 @@ public:
 
     void setPosition(float x, float y);
 
-    float getAngle();
+    virtual float getAngle();
 
     void setAngle(float angle);
 

@@ -10,12 +10,16 @@
 #include "../Game/Textures.h"
 
 class Bullet: public GameObject {
+private:
+    float angle;
 public:
     Bullet(sf::RenderWindow &renderWindow, Player &player);
 
     bool collisionNarrow(GameObject &gameObject) override;
 
     void render() override;
+
+    float getAngle() override;
 
     virtual ~Bullet();
 };
