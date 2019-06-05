@@ -14,6 +14,10 @@ sf::Vector2f GameObject::getPosition() {
     return shape->getPosition();
 }
 
+void GameObject::setPosition(float x, float y) {
+    shape->setPosition(x, y);
+}
+
 void GameObject::setAngle(float angle) {
     shape->setRotation(angle);
 }

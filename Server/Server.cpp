@@ -50,14 +50,48 @@ void Server::loop() {
 
 void Server::tick(int skipped) {
     if (!inProgress) {
-        if (!serverTCP->getSimpleClientList().empty()) {
+        if (serverTCP->getSimpleClientList().size() == 2) {
             inProgress = true;
+            std::cout << "GAME STARTING\n";
             Sleep(1000);
             serverTCP->sendAll("", 1, 1);
-            std::cout<<"STARTED";
+        }
+    } else {
+        for (auto client : serverTCP->getSimpleClientList()) {
+            while (!client.fullData.messages.empty()) {
+                Message *message = serverTCP->getMessage(client);
+                switch (message->type) {
+                    //handle player data
+                    case 2: {
+                        //basically broadcast
+                        for (auto clientToSend : serverTCP->getSimpleClientList()) {
+                            if (client.socket != clientToSend.socket) {
+                                auto playerModel = reinterpret_cast<PlayerModel*> (message->data);
+                                playerModel->number = client.socket;
+                                serverTCP->send(clientToSend, reinterpret_cast<char *>(playerModel),
+                                                sizeof(PlayerModel), 2);
+                            }
+                        }
+                        break;
+                    }
+                    case 3: {
+                        //basically broadcast
+                        for (auto clientToSend : serverTCP->getSimpleClientList()) {
+                            if (client.socket != clientToSend.socket) {
+                                auto playerModel = reinterpret_cast<PlayerModel*> (message->data);
+                                playerModel->number = client.socket;
+                                serverTCP->send(clientToSend, reinterpret_cast<char *>(playerModel),
+                                                sizeof(PlayerModel), 2);
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
         }
     }
 }
+
 
 Server::~Server() {
     delete serverTCP;

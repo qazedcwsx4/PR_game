@@ -7,9 +7,17 @@
 
 #include "GameObject.h"
 
+struct PlayerModel {
+    float x;
+    float y;
+    float angle;
+    int number;
+    //PlayerModel(float x, float y, float angle) : x(x), y(y), angle(angle) {}
+};
 
 class Player : public GameObject {
 private:
+    int playerNumber;
     bool myPlayer;
 public:
     Player(sf::RenderWindow &renderWindow, float x, float y, bool myPlayer);
@@ -21,6 +29,14 @@ public:
     bool isMyPlayer() const;
 
     float getRadius() override;
+
+    PlayerModel exportData();
+
+    void applyData(PlayerModel &playerModel);
+
+    int getPlayerNumber() const;
+
+    void setPlayerNumber(int playerNumber);
 };
 
 

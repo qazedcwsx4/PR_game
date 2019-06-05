@@ -6,6 +6,7 @@
 #include "../Objects/Player.h"
 #include "../Objects/Bullet.h"
 #include <list>
+#include <llogl.h>
 
 class Renderer;
 
@@ -18,8 +19,9 @@ private:
     std::list<Player> players;
     std::list<Bullet> bullets;
     Player *myPlayer;
+    ClientTCP *clientTCP;
 public:
-    Logic(Renderer *renderer);
+    Logic(Renderer *renderer, ClientTCP *clientTCP);
 
     ~Logic();
 

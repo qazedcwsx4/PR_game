@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR "C:/SFML-2.5.1/lib/cmake/SFML")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+set(CMAKE_EXE_LINKER_FLAGS -static)
 
 find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
 

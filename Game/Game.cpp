@@ -12,14 +12,15 @@ void Game::launch() {
 }
 
 Game::Game(const char *addr, int port) {
+    clientTCP = new ClientTCP(addr, port);
+    if (clientTCP->init() != 0) std::cout << "INIT ERROR\n";
     Textures::loadAll();
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
-    logic = new Logic(new Renderer(1280, 720, "Game", settings));
+    logic = new Logic(new Renderer(1280, 720, "Game", settings), clientTCP);
     renderer = logic->getRenderer();
     renderer->setLogic(logic);
-    clientTCP = new ClientTCP(addr, port);
-    if (clientTCP->init() != 0) std::cout << "INIT ERROR\n";
+
 }
 
 void Game::waitForStart() {
@@ -34,12 +35,12 @@ void Game::waitForStart() {
         }
         Sleep(10);
     }
-    std::cout<<"=== 3 ===\n";
+    /*std::cout<<"=== 3 ===\n";
     Sleep(1000);
     std::cout<<"=== 2 ===\n";
     Sleep(1000);
     std::cout<<"=== 1 ===\n";
-    Sleep(1000);
+    Sleep(1000);*/
 }
 
 void Game::loop() {

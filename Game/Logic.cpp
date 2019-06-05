@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Logic.h"
 
-Logic::Logic(Renderer *renderer) : renderer(renderer) {
+Logic::Logic(Renderer *renderer, ClientTCP *clientTCP) : renderer(renderer), clientTCP(clientTCP) {
     map = new Map(renderer->getRenderWindow());
     map->render();
     players.emplace_back(renderer->getRenderWindow(), 200, 200, true);
@@ -33,6 +33,38 @@ void Logic::tick(int skipped) {
     }
 
     //handle net events;
+    Message *message;
+    while (true) {
+        message = clientTCP->getMessage();
+        if (message == nullptr) break;
+        switch (message->type) {
+            //POZYCJA GRACZA
+            case 2: {
+                auto playerModel = reinterpret_cast<PlayerModel *> (message->data);
+                auto found = false;
+                for (Player &player : players) {
+                    if (player.getPlayerNumber() == playerModel->number) {
+                        player.applyData(*playerModel);
+                        found = true;
+                        break;
+                    }
+                }
+
+                //create new player
+                if (!found) {
+                    players.emplace_back(renderer->getRenderWindow(), 0, 0, false);
+                    players.back().applyData(*playerModel);
+                    players.back().setPlayerNumber(playerModel->number);
+                }
+                break;
+            }
+            default: {
+                std::cout << "UNKNOWN NETWORK MESSAGE";
+                break;
+            }
+        }
+    }
+
 
     //get inputs
     sf::Vector2f mousePosition = (sf::Vector2f) sf::Mouse::getPosition(renderer->getRenderWindow());
@@ -53,16 +85,26 @@ void Logic::tick(int skipped) {
                         -atan((mousePosition.x - myPlayerPosition.x) / (mousePosition.y - myPlayerPosition.y)) * 180 /
                         3.14159265 + 180;
             player.setAngle(myPlayerAngle);
+            bool playerMoved = false;
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
                 tryMoveBy(player, -3, 0);
+                playerMoved = true;
             } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
                 tryMoveBy(player, 3, 0);
+                playerMoved = true;
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
                 tryMoveBy(player, 0, -3);
+                playerMoved = true;
             } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
                 tryMoveBy(player, 0, 3);
+                playerMoved = true;
             }
+            if (playerMoved) {
+                auto playerData = player.exportData();
+                clientTCP->send(reinterpret_cast<char *>(&playerData), sizeof(PlayerModel), 2);
+            }
+
         }
     }
 
@@ -97,9 +139,9 @@ void Logic::tryMoveBy(GameObject &gameObject, float x, float y) {
             if (gameObject.collisionNarrow(go)) {
                 if (typeid(Bullet) == typeid(gameObject)) {
                     Bullet &bullet = dynamic_cast<Bullet &> (gameObject);
-                    if (bullet.getSpeed() >= 5) bullets.remove(bullet);
+                    if (bullet.getSpeed() > 8) bullets.remove(bullet);
                     gameObject.moveBy(-x, -y);
-                    bullet.setSpeed(bullet.getSpeed() + 1);
+                    bullet.setSpeed(bullet.getSpeed() * 2);
                     gameObject.setAngle(go.getNormal() + (go.getNormal() - gameObject.getAngle()));
                 } else if (typeid(Player) == typeid(gameObject)) {
                     gameObject.moveBy(-x, -y);

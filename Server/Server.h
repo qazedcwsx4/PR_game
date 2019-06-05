@@ -8,6 +8,8 @@
 #include <llogl.h>
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "../Objects/Player.h"
+#include "../Objects/Bullet.h"
 
 class Server {
 private:
