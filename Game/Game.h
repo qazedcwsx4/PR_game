@@ -3,7 +3,7 @@
 
 #include "Renderer.h"
 #include "Logic.h"
-#include "Textures.h"
+#include "../Objects/Textures.h"
 
 class Game {
 private:

@@ -3,7 +3,7 @@
 //
 
 #include "Player.h"
-#include "../Game/Textures.h"
+#include "Textures.h"
 #include "Wall.h"
 #include "Bullet.h"
 #include <math.h>

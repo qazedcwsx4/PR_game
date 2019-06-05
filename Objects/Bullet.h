@@ -7,7 +7,7 @@
 
 #include "GameObject.h"
 #include "Player.h"
-#include "../Game/Textures.h"
+#include "Textures.h"
 
 class Bullet : public GameObject {
 private:
