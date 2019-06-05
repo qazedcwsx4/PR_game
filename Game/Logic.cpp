@@ -28,6 +28,8 @@ void Logic::tick(int skipped) {
             case sf::Event::MouseButtonPressed:
                 if (event.mouseButton.button == sf::Mouse::Left) {
                     bullets.emplace_back(renderer->getRenderWindow(), *myPlayer);
+                    auto bulletModel = bullets.back().exportData();
+                    clientTCP->send(reinterpret_cast<char *>(&bulletModel), sizeof(BulletModel), 3);
                 }
         }
     }
@@ -58,11 +60,17 @@ void Logic::tick(int skipped) {
                 }
                 break;
             }
+            case 3: {
+                auto bulletModel = reinterpret_cast<BulletModel *> (message->data);
+                bullets.emplace_back(renderer->getRenderWindow(), *bulletModel);
+                break;
+            }
             default: {
                 std::cout << "UNKNOWN NETWORK MESSAGE";
                 break;
             }
         }
+        delete message;
     }
 
 

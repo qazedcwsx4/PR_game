@@ -66,7 +66,7 @@ void Server::tick(int skipped) {
                         //basically broadcast
                         for (auto clientToSend : serverTCP->getSimpleClientList()) {
                             if (client.socket != clientToSend.socket) {
-                                auto playerModel = reinterpret_cast<PlayerModel*> (message->data);
+                                auto playerModel = reinterpret_cast<PlayerModel *> (message->data);
                                 playerModel->number = client.socket;
                                 serverTCP->send(clientToSend, reinterpret_cast<char *>(playerModel),
                                                 sizeof(PlayerModel), 2);
@@ -74,19 +74,18 @@ void Server::tick(int skipped) {
                         }
                         break;
                     }
-                    case 3: {
+                    /*case 3: {
                         //basically broadcast
                         for (auto clientToSend : serverTCP->getSimpleClientList()) {
                             if (client.socket != clientToSend.socket) {
-                                auto playerModel = reinterpret_cast<PlayerModel*> (message->data);
-                                playerModel->number = client.socket;
-                                serverTCP->send(clientToSend, reinterpret_cast<char *>(playerModel),
-                                                sizeof(PlayerModel), 2);
+                                serverTCP->send(clientToSend, reinterpret_cast<char *>(message->data), message->size,
+                                                3);
                             }
                         }
                         break;
-                    }
+                    }*/
                 }
+                delete message;
             }
         }
     }

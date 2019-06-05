@@ -44,4 +44,21 @@ void Bullet::setSpeed(float speed) {
     this->speed = speed;
 }
 
+BulletModel Bullet::exportData() {
+    auto pos = getPosition();
+    return BulletModel{pos.x, pos.y, angle};
+}
 
+void Bullet::applyData(BulletModel &bulletModel) {
+    setPosition(bulletModel.x, bulletModel.y);
+    setAngle(angle);
+}
+
+Bullet::Bullet(sf::RenderWindow &renderWindow, BulletModel &bulletModel) : GameObject(renderWindow), angle(bulletModel.angle) {
+    shape = new sf::CircleShape(50);
+    shape->setTexture(Textures::getBulletTexture());
+    shape->setOrigin(50, 50);
+    shape->setPosition(bulletModel.x, bulletModel.y);
+    shape->setScale(0.1, 0.1);
+    speed = 1;
+}

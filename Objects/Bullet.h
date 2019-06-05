@@ -9,12 +9,20 @@
 #include "Player.h"
 #include "Textures.h"
 
+struct BulletModel {
+    float x;
+    float y;
+    float angle;
+};
+
 class Bullet : public GameObject {
 private:
     float angle;
     float speed;
 public:
     Bullet(sf::RenderWindow &renderWindow, Player &player);
+
+    Bullet(sf::RenderWindow &renderWindow, BulletModel &bulletModel);
 
     void render() override;
 
@@ -29,6 +37,10 @@ public:
     float getSpeed() const;
 
     void setSpeed(float speed);
+
+    BulletModel exportData();
+
+    void applyData(BulletModel &bulletModel);
 };
 
 
