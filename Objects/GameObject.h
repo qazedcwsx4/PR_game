@@ -2,7 +2,6 @@
 #define GAME_GAMEOBJECT_H
 
 #include <SFML/Graphics.hpp>
-
 class GameObject {
 protected:
     sf::RenderWindow &renderWindow;
@@ -12,7 +11,7 @@ protected:
 public:
     virtual bool collisionBroad(GameObject &gameObject);
 
-    virtual bool collisionNarrow(GameObject &gameObject) = 0;
+    virtual bool collisionNarrow(GameObject &gameObject);
 
     virtual void render() = 0;
 
@@ -24,9 +23,13 @@ public:
 
     virtual float getAngle();
 
-    void setAngle(float angle);
+    virtual void setAngle(float angle);
 
     void moveBy(float x, float y);
+
+    virtual float getRadius();
+
+    bool operator == (const GameObject &gameObject);
 };
 
 

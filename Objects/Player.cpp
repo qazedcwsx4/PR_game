@@ -4,6 +4,9 @@
 
 #include "Player.h"
 #include "../Game/Textures.h"
+#include "Wall.h"
+#include "Bullet.h"
+#include <math.h>
 
 Player::Player(sf::RenderWindow &renderWindow, float x, float y, bool myPlayer) : GameObject(renderWindow),
                                                                                   myPlayer(myPlayer) {
@@ -13,10 +16,6 @@ Player::Player(sf::RenderWindow &renderWindow, float x, float y, bool myPlayer) 
     shape->setOrigin(50, 50);
     shape->setPosition(x, y);
     shape->setScale(0.33, 0.33);
-}
-
-bool Player::collisionNarrow(GameObject &gameObject) {
-    return false;
 }
 
 void Player::render() {
@@ -29,4 +28,9 @@ Player::~Player() {
 
 bool Player::isMyPlayer() const {
     return myPlayer;
+}
+
+float Player::getRadius() {
+    auto circleShape = dynamic_cast<sf::CircleShape *> (shape);
+    return circleShape->getRadius() * circleShape->getScale().x;
 }

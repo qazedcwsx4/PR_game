@@ -18,8 +18,12 @@ Map::Map(sf::RenderWindow &renderWindow) : renderWindow(renderWindow) {
     walls.emplace_back(renderWindow, wid / 2, hei / 2 - 200, wid / 2 + 200, hei / 2);
 }
 
-void Map::render(){
+void Map::render() {
     for (auto &wall : walls) {
         wall.render();
     }
+}
+
+std::vector<Wall> &Map::getWalls() {
+    return walls;
 }

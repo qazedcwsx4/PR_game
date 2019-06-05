@@ -11,17 +11,13 @@ Bullet::Bullet(sf::RenderWindow &renderWindow, Player &player) : GameObject(rend
     auto playerPos = player.getPosition();
     shape->setPosition(playerPos.x, playerPos.y);
     shape->setScale(0.1, 0.1);
+    speed = 1;
 }
 
 Bullet::~Bullet() {
 
 }
 
-
-
-bool Bullet::collisionNarrow(GameObject &gameObject) {
-    return false;
-}
 
 void Bullet::render() {
     renderWindow.draw(*shape);
@@ -30,3 +26,22 @@ void Bullet::render() {
 float Bullet::getAngle() {
     return angle;
 }
+
+void Bullet::setAngle(float angle) {
+    this->angle = angle;
+}
+
+float Bullet::getRadius() {
+    auto circleShape = dynamic_cast<sf::CircleShape *> (shape);
+    return circleShape->getRadius() * circleShape->getScale().x;
+}
+
+float Bullet::getSpeed() const {
+    return speed;
+}
+
+void Bullet::setSpeed(float speed) {
+    this->speed = speed;
+}
+
+

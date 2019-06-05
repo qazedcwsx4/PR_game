@@ -16,7 +16,10 @@ private:
     sf::RenderWindow &renderWindow;
 public:
     explicit Map(sf::RenderWindow &renderWindow);
+
     void render();
+
+    std::vector<Wall> &getWalls();
 };
 
 

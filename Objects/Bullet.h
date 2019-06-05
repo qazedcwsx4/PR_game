@@ -12,16 +12,23 @@
 class Bullet: public GameObject {
 private:
     float angle;
+    float speed;
 public:
     Bullet(sf::RenderWindow &renderWindow, Player &player);
-
-    bool collisionNarrow(GameObject &gameObject) override;
 
     void render() override;
 
     float getAngle() override;
 
     virtual ~Bullet();
+
+    float getRadius() override;
+
+    void setAngle(float angle) override;
+
+    float getSpeed() const;
+
+    void setSpeed(float speed);
 };
 
 

@@ -12,11 +12,13 @@ private:
     bool myPlayer;
 public:
     Player(sf::RenderWindow &renderWindow, float x, float y, bool myPlayer);
-    bool collisionNarrow(GameObject &gameObject) override;
+
     void render() override;
     ~Player();
 
     bool isMyPlayer() const;
+
+    float getRadius() override;
 };
 
 

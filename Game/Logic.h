@@ -8,6 +8,7 @@
 #include <list>
 
 class Renderer;
+
 class Map;
 
 class Logic {
@@ -27,6 +28,8 @@ public:
     Renderer *getRenderer();
 
     Map *getMap();
+
+    void tryMoveBy(GameObject &gameObject, float x, float y);
 
     std::list<Player> &getPlayers();
 

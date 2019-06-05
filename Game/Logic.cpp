@@ -28,7 +28,6 @@ void Logic::tick(int skipped) {
             case sf::Event::MouseButtonPressed:
                 if (event.mouseButton.button == sf::Mouse::Left) {
                     bullets.emplace_back(renderer->getRenderWindow(), *myPlayer);
-                    std::cout << "XDD";
                 }
         }
     }
@@ -55,21 +54,22 @@ void Logic::tick(int skipped) {
                         3.14159265 + 180;
             player.setAngle(myPlayerAngle);
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-                player.moveBy(-3, 0);
+                tryMoveBy(player, -3, 0);
             } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-                player.moveBy(3, 0);
+                tryMoveBy(player, 3, 0);
             }
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-                player.moveBy(0, -3);
+                tryMoveBy(player, 0, -3);
             } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-                player.moveBy(0, 3);
+                tryMoveBy(player, 0, 3);
             }
         }
     }
 
     //process bullets
     for (Bullet &bullet : bullets) {
-        bullet.moveBy(1 * cos((bullet.getAngle()-90)*3.14159265/180), 1 * sin((bullet.getAngle()-90)*3.14159265/180));
+        tryMoveBy(bullet, bullet.getSpeed() * cos((bullet.getAngle() - 90) * 3.14159265 / 180),
+                  bullet.getSpeed() * sin((bullet.getAngle() - 90) * 3.14159265 / 180));
     }
 }
 
@@ -87,5 +87,33 @@ std::list<Player> &Logic::getPlayers() {
 
 std::list<Bullet> &Logic::getBullets() {
     return bullets;
+}
+
+//collision detection
+void Logic::tryMoveBy(GameObject &gameObject, float x, float y) {
+    gameObject.moveBy(x, y);
+    for (Wall &go : map->getWalls()) {
+        if (gameObject.collisionBroad(go)) {
+            if (gameObject.collisionNarrow(go)) {
+                if (typeid(Bullet) == typeid(gameObject)) {
+                    Bullet &bullet = dynamic_cast<Bullet &> (gameObject);
+                    if (bullet.getSpeed()>=5) bullets.remove(bullet);
+                    gameObject.moveBy(-x, -y);
+                    bullet.setSpeed(bullet.getSpeed()+1);
+                    gameObject.setAngle(go.getNormal() + (go.getNormal() - gameObject.getAngle()));
+                } else if (typeid(Player) == typeid(gameObject)) {
+                    gameObject.moveBy(-x, -y);
+                }
+                return;
+            }
+        }
+    }
+    for (GameObject &go : bullets) {
+        if (gameObject.collisionBroad(go)) {
+            if (gameObject.collisionNarrow(go)) {
+                return;
+            }
+        }
+    }
 }
 
