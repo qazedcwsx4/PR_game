@@ -4,16 +4,18 @@
 
 #ifndef GAME_PLAYER_H
 #define GAME_PLAYER_H
+
 #include "GameObject.h"
 
 
-class Player : public GameObject{
+class Player : public GameObject {
 private:
     bool myPlayer;
 public:
     Player(sf::RenderWindow &renderWindow, float x, float y, bool myPlayer);
 
     void render() override;
+
     ~Player();
 
     bool isMyPlayer() const;

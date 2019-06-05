@@ -2,10 +2,12 @@
 #define GAME_GAMEOBJECT_H
 
 #include <SFML/Graphics.hpp>
+
 class GameObject {
 protected:
     sf::RenderWindow &renderWindow;
     sf::Shape *shape;
+
     explicit GameObject(sf::RenderWindow &renderWindow);
 
 public:
@@ -29,7 +31,7 @@ public:
 
     virtual float getRadius();
 
-    bool operator == (const GameObject &gameObject);
+    bool operator==(const GameObject &gameObject);
 };
 
 

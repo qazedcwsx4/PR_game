@@ -16,8 +16,10 @@ private:
     float length;
     float width;
 public:
-    Wall(sf::RenderWindow &renderWindow, float x1,float x2,float y1,float y2);
+    Wall(sf::RenderWindow &renderWindow, float x1, float x2, float y1, float y2);
+
     void render() override;
+
     bool collisionNarrow(GameObject &gameObject) override;
 
     float getX1() const;

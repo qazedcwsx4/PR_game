@@ -9,7 +9,7 @@
 #include "Player.h"
 #include "../Game/Textures.h"
 
-class Bullet: public GameObject {
+class Bullet : public GameObject {
 private:
     float angle;
     float speed;

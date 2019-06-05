@@ -97,9 +97,9 @@ void Logic::tryMoveBy(GameObject &gameObject, float x, float y) {
             if (gameObject.collisionNarrow(go)) {
                 if (typeid(Bullet) == typeid(gameObject)) {
                     Bullet &bullet = dynamic_cast<Bullet &> (gameObject);
-                    if (bullet.getSpeed()>=5) bullets.remove(bullet);
+                    if (bullet.getSpeed() >= 5) bullets.remove(bullet);
                     gameObject.moveBy(-x, -y);
-                    bullet.setSpeed(bullet.getSpeed()+1);
+                    bullet.setSpeed(bullet.getSpeed() + 1);
                     gameObject.setAngle(go.getNormal() + (go.getNormal() - gameObject.getAngle()));
                 } else if (typeid(Player) == typeid(gameObject)) {
                     gameObject.moveBy(-x, -y);

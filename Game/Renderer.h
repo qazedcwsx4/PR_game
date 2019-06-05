@@ -6,6 +6,7 @@
 #include "Logic.h"
 
 class Logic;
+
 class Renderer {
 private:
     sf::RenderWindow renderWindow;

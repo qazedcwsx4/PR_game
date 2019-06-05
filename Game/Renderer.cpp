@@ -7,10 +7,10 @@ Renderer::Renderer(unsigned int width, unsigned int height, const std::string &t
 void Renderer::render(double dT) {
     renderWindow.clear();
     logic->getMap()->render();
-    for (Player &player : logic->getPlayers()){
+    for (Player &player : logic->getPlayers()) {
         player.render();
     }
-    for (Bullet &bullet : logic->getBullets()){
+    for (Bullet &bullet : logic->getBullets()) {
         bullet.render();
     }
     renderWindow.display();
