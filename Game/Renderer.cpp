@@ -4,6 +4,11 @@ Renderer::Renderer(unsigned int width, unsigned int height, const std::string &t
         renderWindow(sf::VideoMode(width, height), title, sf::Style::Default, settings) {
 }
 
+
+void Renderer::createWindow() {
+
+}
+
 void Renderer::render(double dT) {
     renderWindow.clear();
     logic->getMap()->render();

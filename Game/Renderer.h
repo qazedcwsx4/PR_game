@@ -12,6 +12,8 @@ private:
     sf::RenderWindow renderWindow;
     Logic *logic;
 
+    void createWindow();
+
 public:
     Renderer(unsigned int width, unsigned int height, const std::string &title, sf::ContextSettings settings);
 

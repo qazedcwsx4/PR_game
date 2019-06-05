@@ -7,13 +7,39 @@
 #include "Game.h"
 
 void Game::launch() {
+    waitForStart();
+    loop();
+}
+
+Game::Game(const char *addr, int port) {
     Textures::loadAll();
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
     logic = new Logic(new Renderer(1280, 720, "Game", settings));
     renderer = logic->getRenderer();
     renderer->setLogic(logic);
-    loop();
+    clientTCP = new ClientTCP(addr, port);
+    if (clientTCP->init() != 0) std::cout << "INIT ERROR\n";
+}
+
+void Game::waitForStart() {
+    while (true) {
+        Message *message = clientTCP->getMessage();
+        if (message != nullptr) {
+            if (message->type == 1) {
+                delete message;
+                break;
+            }
+            delete message;
+        }
+        Sleep(10);
+    }
+    std::cout<<"=== 3 ===\n";
+    Sleep(1000);
+    std::cout<<"=== 2 ===\n";
+    Sleep(1000);
+    std::cout<<"=== 1 ===\n";
+    Sleep(1000);
 }
 
 void Game::loop() {
@@ -71,3 +97,8 @@ void Game::loop() {
         sf::sleep(sf::microseconds(505));
     }
 }
+
+Game::~Game() {
+    delete clientTCP;
+}
+

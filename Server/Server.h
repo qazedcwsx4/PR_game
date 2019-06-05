@@ -14,6 +14,7 @@ private:
     unsigned int targetTickrate;
     bool shouldQuit = false;
     ServerTCP *serverTCP;
+    bool inProgress = false;
 
     void tick(int skipped);
 public:

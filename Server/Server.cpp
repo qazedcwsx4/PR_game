@@ -49,7 +49,14 @@ void Server::loop() {
 }
 
 void Server::tick(int skipped) {
-    //std::cout << serverTCP->getSimpleClientList().size();
+    if (!inProgress) {
+        if (!serverTCP->getSimpleClientList().empty()) {
+            inProgress = true;
+            Sleep(1000);
+            serverTCP->sendAll("", 1, 1);
+            std::cout<<"STARTED";
+        }
+    }
 }
 
 Server::~Server() {
